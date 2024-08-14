@@ -1,0 +1,22 @@
+# loan.py
+from datetime import datetime, timedelta
+
+class Loan:
+    def __init__(self, user, material, loan_duration=14):
+        self.user = user
+        self.material = material
+        self.loan_date = datetime.now()
+        self.due_date = self.loan_date + timedelta(days=loan_duration)
+        self.returned = False
+
+    def return_item(self):
+        self.returned = True
+
+    def is_overdue(self):
+        return datetime.now() > self.due_date
+
+    def __str__(self):
+        return (f"Loan - User: {self.user.name}, Material: {self.material.title}, "
+                f"Loan Date: {self.loan_date.strftime('%Y-%m-%d')}, "
+                f"Due Date: {self.due_date.strftime('%Y-%m-%d')}, "
+                f"Returned: {'Yes' if self.returned else 'No'}")
