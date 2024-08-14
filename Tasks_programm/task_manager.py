@@ -11,7 +11,7 @@ def show_menu():
     print("5. Exit")
     
 def main():
-    
+    load_tasks()
     while True:
         show_menu()
         option =  input("Choose an option: ")
@@ -25,6 +25,7 @@ def main():
         elif option == '4':
             delete_task()
         elif option == '5':
+            save_tasks()
             print("Bye bye...")
             break
         else:
