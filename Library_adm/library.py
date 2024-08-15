@@ -17,7 +17,7 @@ class Library:
         self.users.append(user)
         print(f"User '{user.name}' added to the library.")
 
-    def lend_material(self, user_id, material_title, loan_duration=14):
+    def lend_material(self, user_id, material_title, loan_duration=30):
         user = next((u for u in self.users if u.user_id == user_id), None)
         material = next((m for m in self.materials if m.title == material_title), None)
         

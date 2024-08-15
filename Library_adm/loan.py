@@ -1,8 +1,10 @@
 # loan.py
 from datetime import datetime, timedelta
+from material import Book, Magazine
+from user import User
 
 class Loan:
-    def __init__(self, user, material, loan_duration=14):
+    def __init__(self, user, material, loan_duration=30):
         self.user = user
         self.material = material
         self.loan_date = datetime.now()
