@@ -16,6 +16,12 @@ class Loan:
 
     def is_overdue(self):
         return datetime.now() > self.due_date
+    
+    def days_until_due(self):
+        return (self.due_date - datetime.now()).days
+
+    def is_due_soon(self, days_before=3):
+        return 0 < self.days_until_due() <= days_before
 
     def __str__(self):
         return (f"Loan - User: {self.user.name}, Material: {self.material.title}, "
