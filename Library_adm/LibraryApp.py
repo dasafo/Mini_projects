@@ -39,6 +39,9 @@ class LibraryApp:
         self.text_area = tk.Text(root, wrap='word')
         self.text_area.pack(expand=True, fill='both')
 
+        # Admin user setup
+        self.admin_user = User("Admin", "A001", "admin@example.com", role='admin')
+
     def add_book(self):
         # Get input from the user to add a book.
         title = simpledialog.askstring("Input", "Enter book title:")
@@ -49,8 +52,10 @@ class LibraryApp:
         if title and author and year and isbn and genre:
             # Create a Book object and add it to the library.
             book = Book(title, author, year, isbn, genre)
-            self.library.add_material(book, admin_user)
+            self.library.add_material(book, self.admin_user)
             messagebox.showinfo("Success", f"Book '{title}' added successfully!")
+        else:
+            messagebox.showerror("Error", "All fields must be provided!")
 
     def add_magazine(self):
         # Get input from the user to add a magazine.
@@ -61,8 +66,10 @@ class LibraryApp:
         if title and author and year and issue_number:
             # Create a Magazine object and add it to the library.
             magazine = Magazine(title, author, year, issue_number)
-            self.library.add_material(magazine, admin_user)
+            self.library.add_material(magazine, self.admin_user)
             messagebox.showinfo("Success", f"Magazine '{title}' added successfully!")
+        else:
+            messagebox.showerror("Error", "All fields must be provided!")
 
     def list_materials(self):
         # Display all materials in the library.
@@ -83,8 +90,10 @@ class LibraryApp:
         if name and user_id and email:
             # Create a User object and add it to the library.
             user = User(name, user_id, email, role=role)
-            self.library.add_user(user, admin_user)
+            self.library.add_user(user, self.admin_user)
             messagebox.showinfo("Success", f"User '{name}' added successfully!")
+        else:
+            messagebox.showerror("Error", "All fields must be provided!")
 
     def list_users(self):
         # Display all users in the library.
@@ -101,18 +110,28 @@ class LibraryApp:
         user_id = simpledialog.askstring("Input", "Enter user ID:")
         material_title = simpledialog.askstring("Input", "Enter material title:")
         if user_id and material_title:
-            # Lend the material to the user.
-            self.library.lend_material(user_id, material_title)
-            messagebox.showinfo("Success", f"Material '{material_title}' lent successfully!")
+            try:
+                # Lend the material to the user.
+                self.library.lend_material(user_id, material_title)
+                messagebox.showinfo("Success", f"Material '{material_title}' lent successfully!")
+            except Exception as e:
+                messagebox.showerror("Error", str(e))
+        else:
+            messagebox.showerror("Error", "All fields must be provided!")
 
     def return_material(self):
         # Get input from the user to return a material.
         user_id = simpledialog.askstring("Input", "Enter user ID:")
         material_title = simpledialog.askstring("Input", "Enter material title:")
         if user_id and material_title:
-            # Return the material to the library.
-            self.library.return_material(user_id, material_title)
-            messagebox.showinfo("Success", f"Material '{material_title}' returned successfully!")
+            try:
+                # Return the material to the library.
+                self.library.return_material(user_id, material_title)
+                messagebox.showinfo("Success", f"Material '{material_title}' returned successfully!")
+            except Exception as e:
+                messagebox.showerror("Error", str(e))
+        else:
+            messagebox.showerror("Error", "All fields must be provided!")
 
     def view_loan_history(self):
         # Get input from the user to view loan history.
@@ -120,12 +139,16 @@ class LibraryApp:
         if user_id:
             self.text_area.delete(1.0, tk.END)
             self.text_area.insert(tk.END, f"Loan History for User ID '{user_id}':\n")
-            # Display the loan history for the specified user.
-            self.library.view_user_loan_history(user_id)
+            try:
+                # Display the loan history for the specified user.
+                self.library.view_user_loan_history(user_id)
+            except Exception as e:
+                messagebox.showerror("Error", str(e))
+        else:
+            messagebox.showerror("Error", "User ID must be provided!")
 
 # Run the application
 if __name__ == "__main__":
-    admin_user = User("Admin", "A001", "admin@example.com", role='admin')
     root = tk.Tk()
     app = LibraryApp(root)
     root.mainloop()
