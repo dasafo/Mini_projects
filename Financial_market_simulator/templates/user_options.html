@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ user.name }}'s Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>{{ user.name }}'s Dashboard</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>What would you like to do?</h2>
+        <div class="options">
+            <a href="{{ url_for('view_prices') }}" class="btn">View Stock Prices</a>
+            <a href="{{ url_for('view_portfolio') }}" class="btn">View Portfolio</a>
+            <a href="{{ url_for('simulate_market') }}" class="btn">Simulate Market</a>
+
+            <h3>Buy Stocks</h3>
+            <form action="{{ url_for('buy_stock') }}" method="post">
+                <input type="text" name="symbol" placeholder="Stock Symbol" required>
+                <input type="number" name="quantity" placeholder="Quantity" required>
+                <button type="submit" class="btn">Buy</button>
+            </form>
+
+            <h3>Sell Stocks</h3>
+            <form action="{{ url_for('sell_stock') }}" method="post">
+                <input type="text" name="symbol" placeholder="Stock Symbol" required>
+                <input type="number" name="quantity" placeholder="Quantity" required>
+                <button type="submit" class="btn">Sell</button>
+            </form>
+
+            <a href="{{ url_for('index') }}" class="btn">Back to Home</a>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

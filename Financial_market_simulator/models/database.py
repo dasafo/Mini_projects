@@ -7,21 +7,21 @@ Base = declarative_base()
 
 # Define the UserDB class which maps to the 'users' table
 class UserDB(Base):
-    __tablename__ = 'users'  # Specify the table name
-    id = Column(Integer, primary_key=True)  # Define an integer primary key column
-    name = Column(String)  # Define a string column for the user's name
-    capital = Column(Float)  # Define a float column for the user's capital
-    portfolio = relationship("PortfolioItemDB", back_populates="user")  # Define a relationship to the PortfolioItemDB class
-
+    __tablename__ = 'users'
+    id = Column(Integer, primary_key=True, autoincrement=True)  # Auto-incrementing primary key
+    name = Column(String, unique=True, nullable=False)
+    capital = Column(Float, nullable=False)
+    portfolio = relationship("PortfolioItemDB", back_populates="user")
+    
 # Define the PortfolioItemDB class which maps to the 'portfolio_items' table
 class PortfolioItemDB(Base):
-    __tablename__ = 'portfolio_items'  # Specify the table name
-    id = Column(Integer, primary_key=True)  # Define an integer primary key column
-    user_id = Column(Integer, ForeignKey('users.id'))  # Define a foreign key column referencing the 'users' table
-    symbol = Column(String)  # Define a string column for the stock symbol
-    quantity = Column(Integer)  # Define an integer column for the quantity of stocks
-    user = relationship("UserDB", back_populates="portfolio")  # Define a relationship back to the UserDB class
-
+    __tablename__ = 'portfolio_items'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    symbol = Column(String, nullable=False)
+    quantity = Column(Integer, nullable=False)
+    user = relationship("UserDB", back_populates="portfolio")
+    
 # Define the StockPriceDB class which maps to the 'stock_prices' table
 class StockPriceDB(Base):
     __tablename__ = 'stock_prices'  # Specify the table name

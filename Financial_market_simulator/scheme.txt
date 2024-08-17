@@ -1,14 +1,33 @@
 financial_simulator/
+|
 ├── main.py
+|
 ├── models/
 │   ├── __init__.py
 │   ├── market.py
 │   ├── user.py
 │   └── transaction.py
+|
 ├── services/
 │   ├── __init__.py
 │   └── market_service.py
+|
+├── static/
+│   ├── css/
+│   │   └── styles.css  # Archivo CSS personalizado
+│   └── js/
+│       └── script.js  # Archivo JS personalizado (opcional)
+│
+├── templates/
+│   ├── index.html
+│   ├── user_options.html  # Página de opciones para el usuario seleccionado
+│   ├── view_prices.html
+│   └── view_portfolio.html
+│
 ├── data/
+│   ├── users.json
+│   ├── market_data.json
+|
 ├── tests/
 └── requirements.txt
 

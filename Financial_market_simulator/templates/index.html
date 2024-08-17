@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Market Simulator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Financial Market Simulator</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Select a User</h2>
+
+            <div class="user-cards">
+        {% for user in users %}
+        <a href="{{ url_for('select_user', user_id=user.db_user.id) }}" style="text-decoration: none;">
+            <div class="user-card" style="background-color: {{ user.color }};">
+                {{ user.name }}
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+        <!-- Button to open the modal -->
+        <button id="openModalBtn">Create New User</button>
+    </div>
+
+    <!-- The Modal -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <span class="closeBtn">&times;</span>
+            <h2>Create a New User</h2>
+            <form id="createUserForm" action="{{ url_for('create_user') }}" method="post">
+                <input type="text" name="name" placeholder="User Name" required>
+                <input type="number" name="capital" placeholder="Initial Capital" required>
+                <button type="submit">Save User</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

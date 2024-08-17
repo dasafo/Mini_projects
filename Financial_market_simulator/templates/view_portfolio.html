@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio de {{ user.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Portafolio de {{ user.name }}</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <p>Capital: ${{ "%.2f" | format(user.capital) }}</p>
+        <ul>
+            {% for symbol, quantity in user.portfolio.items() %}
+            <li>{{ symbol }}: {{ quantity }} acciones</li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('index') }}">Volver al Menú</a>
+    </div>
+</body>
+</html>
