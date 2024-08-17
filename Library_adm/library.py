@@ -159,10 +159,10 @@ class Library:
     def send_email_notification(self, user, loan):
         sender = "your_email@example.com"
         receiver = user.email
-        subject = f"Préstamo próximo a vencer: {loan.material.title}"
-        body = (f"Hola {user.name},\n\nEl material '{loan.material.title}' que has prestado "
-                f"está próximo a vencer el {loan.due_date.strftime('%Y-%m-%d')}.\n\n"
-                "Por favor, realiza la devolución antes de la fecha límite.\n\nGracias.")
+        subject = f"Loan is about to expire: {loan.material.title}"
+        body = (f"Hi {user.name},\n\nThe material '{loan.material.title}' you have loaned "
+                f"is about to expire on the {loan.due_date.strftime('%Y-%m-%d')}.\n\n"
+                "Please make the return before the deadline.\n\nThanks!")
 
         msg = MIMEText(body)
         msg['Subject'] = subject

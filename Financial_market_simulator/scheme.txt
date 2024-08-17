@@ -1,0 +1,31 @@
+financial_simulator/
+├── main.py
+├── models/
+│   ├── __init__.py
+│   ├── market.py
+│   ├── user.py
+│   └── transaction.py
+├── services/
+│   ├── __init__.py
+│   └── market_service.py
+├── data/
+├── tests/
+└── requirements.txt
+
+
++ main.py --> This will be the entry point of the application.
+
++ models/: Here we will place the classes that represent the different components of the simulator (users, market, transactions).
+    - user.py --> We will represent users, including their portfolios and available capital.
+    - market.py --> We will represent the market with a set of available stocks.
+    - transaction.py --> We will define how a purchase or sale of shares is recorded.
+    - database.py --> DB actions
+
+
++ services/: Here we will manage the market logic and other application operations.
+    - market_service.py --> We will create functions that simulate the fluctuation of stock prices.
+                            We will implement a method to get the current price of a stock.
+
++ data/: We can use it to store configuration files or temporary data.
+
++ tests/: Here we will put our unit tests as we go along.
