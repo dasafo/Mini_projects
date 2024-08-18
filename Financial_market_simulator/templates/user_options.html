@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ user.name }}'s Dashboard</title>
+    <!-- Load CSS styles from the static directory -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <header>
         <div class="container">
+            <!-- Display the user's name dynamically in the dashboard title -->
             <h1>{{ user.name }}'s Dashboard</h1>
         </div>
     </header>
@@ -16,11 +18,15 @@
     <div class="container">
         <h2>What would you like to do?</h2>
         <div class="options">
+            <!-- Generate a URL for viewing stock prices -->
             <a href="{{ url_for('view_prices') }}" class="btn">View Stock Prices</a>
+            <!-- Generate a URL for viewing the user's portfolio -->
             <a href="{{ url_for('view_portfolio') }}" class="btn">View Portfolio</a>
+            <!-- Generate a URL for simulating the market -->
             <a href="{{ url_for('simulate_market') }}" class="btn">Simulate Market</a>
 
             <h3>Buy Stocks</h3>
+            <!-- Form for buying stocks, submits to the 'buy_stock' route -->
             <form action="{{ url_for('buy_stock') }}" method="post">
                 <input type="text" name="symbol" placeholder="Stock Symbol" required>
                 <input type="number" name="quantity" placeholder="Quantity" required>
@@ -28,16 +34,19 @@
             </form>
 
             <h3>Sell Stocks</h3>
+            <!-- Form for selling stocks, submits to the 'sell_stock' route -->
             <form action="{{ url_for('sell_stock') }}" method="post">
                 <input type="text" name="symbol" placeholder="Stock Symbol" required>
                 <input type="number" name="quantity" placeholder="Quantity" required>
                 <button type="submit" class="btn">Sell</button>
             </form>
 
+            <!-- Generate a URL to return to the home page -->
             <a href="{{ url_for('index') }}" class="btn">Back to Home</a>
         </div>
     </div>
 
+    <!-- Load JavaScript script from the static directory -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

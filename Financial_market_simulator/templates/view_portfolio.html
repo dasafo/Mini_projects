@@ -4,22 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portafolio de {{ user.name }}</title>
+    <!-- Load CSS styles from the static directory -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <header>
         <div class="container">
+            <!-- Display the user's name dynamically in the portfolio title -->
             <h1>Portafolio de {{ user.name }}</h1>
         </div>
     </header>
 
     <div class="container">
+        <!-- Display the user's capital formatted to two decimal places -->
         <p>Capital: ${{ "%.2f" | format(user.capital) }}</p>
         <ul>
+            <!-- Loop through the user's portfolio items and display each symbol and quantity -->
             {% for symbol, quantity in user.portfolio.items() %}
             <li>{{ symbol }}: {{ quantity }} acciones</li>
             {% endfor %}
         </ul>
+        <!-- Generate a URL to return to the main menu -->
         <a href="{{ url_for('index') }}">Volver al Menú</a>
     </div>
 </body>

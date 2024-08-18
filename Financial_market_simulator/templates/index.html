@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial Market Simulator</title>
+    <!-- Load CSS styles from the static directory -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
@@ -16,17 +17,21 @@
     <div class="container">
         <h2>Select a User</h2>
 
-            <div class="user-cards">
-        {% for user in users %}
-        <a href="{{ url_for('select_user', user_id=user.db_user.id) }}" style="text-decoration: none;">
-            <div class="user-card" style="background-color: {{ user.color }};">
-                {{ user.name }}
-            </div>
-        </a>
-        {% endfor %}
-    </div>
+        <div class="user-cards">
+            <!-- Loop through the users list and create a link for each user -->
+            {% for user in users %}
+            <!-- Generate a URL for selecting a user with the specific user ID -->
+            <a href="{{ url_for('select_user', user_id=user.db_user.id) }}" style="text-decoration: none;">
+                <!-- Set the background color of the user card dynamically -->
+                <div class="user-card" style="background-color: {{ user.color }};">
+                    <!-- Display the user's name -->
+                    {{ user.name }}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
 
-        <!-- Button to open the modal -->
+        <!-- Button to open the modal for creating a new user -->
         <button id="openModalBtn">Create New User</button>
     </div>
 
@@ -35,6 +40,7 @@
         <div class="modal-content">
             <span class="closeBtn">&times;</span>
             <h2>Create a New User</h2>
+            <!-- Form for creating a new user, submits to the 'create_user' route -->
             <form id="createUserForm" action="{{ url_for('create_user') }}" method="post">
                 <input type="text" name="name" placeholder="User Name" required>
                 <input type="number" name="capital" placeholder="Initial Capital" required>
@@ -43,6 +49,7 @@
         </div>
     </div>
 
+    <!-- Load JavaScript script from the static directory -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
