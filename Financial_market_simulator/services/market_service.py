@@ -15,10 +15,10 @@ class MarketService:
         }
         # Define sentiment events that can positively or negatively impact stock prices
         self.sentiment_events = [
-            {"description": "Lanzamiento de un nuevo producto exitoso", "impact": 1.05, "type": "positive"},
-            {"description": "Problemas regulatorios", "impact": 0.95, "type": "negative"},
-            {"description": "Crisis económica en sector", "impact": 0.90, "type": "negative"},
-            {"description": "Aumento en la demanda de productos", "impact": 1.10, "type": "positive"},
+            {"description": "Launch of a successful new product", "impact": 1.05, "type": "positive"},
+            {"description": "Regulatory problems", "impact": 0.95, "type": "negative"},
+            {"description": "Economic crisis in sector", "impact": 0.90, "type": "negative"},
+            {"description": "Increased product demand", "impact": 1.10, "type": "positive"},
         ]
 
     def set_initial_price(self, symbol, price):
@@ -37,7 +37,7 @@ class MarketService:
     def get_price(self, symbol):
         # Check if the symbol exists in the prices dictionary
         if symbol not in self.prices:
-            raise ValueError("El símbolo no existe en el mercado.")
+            raise ValueError("Symbol doesn't exist in Market.")
         return self.prices[symbol]  # Return the current price of the stock
 
     def simulate_market(self):
@@ -65,7 +65,7 @@ class MarketService:
             if random.random() < 0.05:
                 event = random.choice(self.sentiment_events)
                 self.prices[symbol] *= event["impact"]  # Apply the event's impact on the stock price
-                print(f"Evento '{event['description']}' impacta {symbol}: Nuevo precio {self.prices[symbol]:.2f}")
+                print(f"Event '{event['description']}' impact {symbol}: New price {self.prices[symbol]:.2f}")
 
             # Update the stock price in the database
             stock = session.query(StockPriceDB).filter_by(symbol=symbol).first()
